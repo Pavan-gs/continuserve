@@ -89,5 +89,42 @@ plt.xlabel("Countries")
 plt.ylabel("distance")
 plt.show()
 
+#k-means
+
+clust2 = KMeans(n_clusters=5, random_state=8)
+clust_num = clust2.fit_predict(data1)
+
+data['cnum']=clust_num
+
+grp1=data.iloc[:,1:].groupby('cnum')
+grp1.size()
+
+centroids = clust2.cluster_centers_
+labels = clust2.labels_
+colors = ["g.","r.","b.","y.","k."]
+
+
+# plot the clusters in a 2 dimensional chart
+
+x = pd.DataFrame(data1).iloc[:,[0,1]]
+for i in range(len(data1)):
+    plt.plot(x.iloc[i,0],x.iloc[i,1], colors[labels[i]], markersize=10)
+plt.xlabel("Area")
+plt.ylabel("GDP")
+plt.show()
+
+
+# k-means ---> Data is continuous, number of clusters is known, spherical clusters
+# DBScan --> Good for outliers, noise, unknown number of clusters
+# k-medoids --> Categorical, Robust to outliers
+# Hierarchical --> Hierarchy, visualization
+
+
+
+
+
+
+
+
 
 
